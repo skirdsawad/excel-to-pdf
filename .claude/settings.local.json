@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "WebSearch",
+      "Bash(cd /c/sources/excel-to-pdf && npm run build 2>&1)",
+      "Bash(cd /c/sources/excel-to-pdf && node dist/index.js test.xlsx -o test.pdf 2>&1)"
+    ]
+  }
+}
