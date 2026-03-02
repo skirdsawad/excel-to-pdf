@@ -1,0 +1,29 @@
+src/style-mapper.ts
+  2b6d9d511e680c22 11-12,137
+src/index.ts
+  2b6d9d511e680c22 6-7,26
+src/excel-reader.ts
+  2b6d9d511e680c22 83-93,126,131
+src/pdf-writer.ts
+  2b6d9d511e680c22 74-75,78,80,83-86,138,141
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.7",
+  "base_commit_sha": "e0e3729f142c6541dd9f79bedf0cb1df4b544108",
+  "prompts": {
+    "2b6d9d511e680c22": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "72f95093-301a-4388-92ed-d000700748b0",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Sirirat Kirdsawad <sirirat_k@playtorium.co.th>",
+      "messages": [],
+      "total_additions": 30,
+      "total_deletions": 50,
+      "accepted_lines": 29,
+      "overriden_lines": 0
+    }
+  }
+}
