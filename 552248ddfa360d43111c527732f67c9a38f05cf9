@@ -1,0 +1,23 @@
+.gitignore
+  971923ee4b24a59f 1-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.7",
+  "base_commit_sha": "552248ddfa360d43111c527732f67c9a38f05cf9",
+  "prompts": {
+    "971923ee4b24a59f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "36d0c43a-4053-4f8c-884a-a37f1dad3385",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Sirirat Kirdsawad <sirirat_k@playtorium.co.th>",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 0,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    }
+  }
+}
