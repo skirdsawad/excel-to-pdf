@@ -80,6 +80,17 @@ function buildMergeMap(
   return map;
 }
 
+function formatFormulaResult(result: unknown): string {
+  if (result === undefined) {
+    return "";
+  }
+  if (result instanceof Date) {
+    return result.toLocaleDateString();
+  }
+
+  return String(result);
+}
+
 function extractCellValue(cell: ExcelJS.Cell): string {
   const value = cell.value;
 
@@ -112,30 +123,12 @@ function extractCellValue(cell: ExcelJS.Cell): string {
 
   // Handle formula results
   if (typeof value === "object" && "formula" in value) {
-    const formula = value as ExcelJS.CellFormulaValue;
-    if (formula.result !== undefined) {
-      if (formula.result instanceof Date) {
-        return formula.result.toLocaleDateString();
-      }
-
-      return String(formula.result);
-    }
-
-    return "";
+    return formatFormulaResult((value as ExcelJS.CellFormulaValue).result);
   }
 
   // Handle shared formula
   if (typeof value === "object" && "sharedFormula" in value) {
-    const shared = value as ExcelJS.CellSharedFormulaValue;
-    if (shared.result !== undefined) {
-      if (shared.result instanceof Date) {
-        return shared.result.toLocaleDateString();
-      }
-
-      return String(shared.result);
-    }
-
-    return "";
+    return formatFormulaResult((value as ExcelJS.CellSharedFormulaValue).result);
   }
 
   // Handle hyperlink

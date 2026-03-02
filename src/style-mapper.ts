@@ -8,6 +8,8 @@ import {
   type CellStyle,
 } from "./types.js";
 
+const UNDERLINE_NONE = "none";
+
 const EXCEL_BORDER_WEIGHT_MAP: Record<string, BorderWeight> = {
   thin: BorderWeight.Thin,
   dotted: BorderWeight.Thin,
@@ -132,7 +134,7 @@ export function mapExcelStyle(cell: ExcelJS.Cell): CellStyle {
     if (font.italic) {
       style.italic = true;
     }
-    if (font.underline && font.underline !== "none") {
+    if (font.underline && font.underline !== UNDERLINE_NONE) {
       style.underline = true;
     }
     if (font.strike) {

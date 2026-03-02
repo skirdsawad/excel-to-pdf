@@ -1,6 +1,6 @@
 import path from "node:path";
 import type { Content, ContentTable, CustomTableLayout, TableCell } from "pdfmake/interfaces";
-import { HorizontalAlignment, type CellData, type SheetData } from "./types.js";
+import { type CellData, type SheetData } from "./types.js";
 
 // pdfmake exports a singleton instance via module.exports;
 // named/destructured imports lose `this` context, so we import the whole object.
@@ -45,25 +45,6 @@ function computeColumnWidths(excelWidths: number[]): number[] {
   return rawWidths.map((w) => w * scale);
 }
 
-function mapAlignment(
-  alignment: HorizontalAlignment | undefined
-): "left" | "center" | "right" | "justify" | undefined {
-  if (!alignment) {
-    return undefined;
-  }
-
-  switch (alignment) {
-    case HorizontalAlignment.Left:
-      return "left";
-    case HorizontalAlignment.Center:
-      return "center";
-    case HorizontalAlignment.Right:
-      return "right";
-    case HorizontalAlignment.Justify:
-      return "justify";
-  }
-}
-
 function buildPdfCell(cell: CellData): TableCell {
   if (cell.isMergedSlave) {
     return {};
@@ -90,17 +71,19 @@ function buildPdfCell(cell: CellData): TableCell {
     pdfCell.fillColor = cell.style.backgroundColor;
   }
 
-  const alignment = mapAlignment(cell.style.horizontalAlignment);
-  if (alignment) {
-    pdfCell.alignment = alignment;
+  if (cell.style.horizontalAlignment) {
+    pdfCell.alignment = cell.style.horizontalAlignment;
   }
 
+  const decorations: string[] = [];
   if (cell.style.underline) {
-    pdfCell.decoration = "underline";
+    decorations.push("underline");
   }
-
   if (cell.style.strikethrough) {
-    pdfCell.decoration = "lineThrough";
+    decorations.push("lineThrough");
+  }
+  if (decorations.length > 0) {
+    pdfCell.decoration = decorations.join(" ");
   }
 
   if (cell.colSpan > 1) {
@@ -152,10 +135,10 @@ function buildSheetTable(sheet: SheetData): ContentTable {
   }
 
   const tableLayout: CustomTableLayout = {
-    hLineWidth(rowIndex: number): number {
+    hLineWidth(_rowIndex: number): number {
       return 0.5;
     },
-    vLineWidth(columnIndex: number): number {
+    vLineWidth(_columnIndex: number): number {
       return 0.5;
     },
     hLineColor(): string {

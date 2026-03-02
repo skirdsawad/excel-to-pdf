@@ -3,6 +3,8 @@ import path from "node:path";
 import { Command } from "commander";
 import { convert } from "./converter.js";
 
+const XLSX_EXTENSION = ".xlsx";
+
 const program = new Command();
 
 program
@@ -21,7 +23,7 @@ function handleConvert(input: string, options: { output?: string }): void {
     process.exit(1);
   }
 
-  if (!inputPath.toLowerCase().endsWith(".xlsx")) {
+  if (!inputPath.toLowerCase().endsWith(XLSX_EXTENSION)) {
     console.error("Error: Input file must be a .xlsx file.");
     process.exit(1);
   }
